@@ -1,0 +1,24 @@
+# Build output
+build/
+bin/
+*.o
+*.a
+*.so
+*.dylib
+
+# Python & Environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Benchmark artifacts
+benchmark_results.json
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
