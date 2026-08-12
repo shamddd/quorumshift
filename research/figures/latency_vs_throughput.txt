@@ -1,0 +1,5 @@
+QuorumBench Latency vs Throughput Summary
+------------------------------------------
+B0_StaticMajority: P99=980.0ms | Throughput=2478.33 ops/sec | STCR=83.33%
+B1_StaticFlexible: P99=610.0ms | Throughput=3116.67 ops/sec | STCR=83.33%
+B2_QuorumShift: P99=11.4ms | Throughput=4316.67 ops/sec | STCR=100.0%

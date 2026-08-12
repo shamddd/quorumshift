@@ -1,0 +1,23 @@
+{
+  "B0_StaticMajority": {
+    "stcr": 83.33,
+    "p95_latency_ms": 980.0,
+    "p99_latency_ms": 980.0,
+    "throughput_ops_sec": 2478.33,
+    "stale_read_count": 0
+  },
+  "B1_StaticFlexible": {
+    "stcr": 83.33,
+    "p95_latency_ms": 610.0,
+    "p99_latency_ms": 610.0,
+    "throughput_ops_sec": 3116.67,
+    "stale_read_count": 0
+  },
+  "B2_QuorumShift": {
+    "stcr": 100.0,
+    "p95_latency_ms": 11.4,
+    "p99_latency_ms": 11.4,
+    "throughput_ops_sec": 4316.67,
+    "stale_read_count": 0
+  }
+}
