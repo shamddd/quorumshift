@@ -14,8 +14,9 @@ void Cluster::initialize(std::size_t num_nodes) {
     for (std::size_t i = 1; i <= num_nodes; ++i) {
         NodeId id = static_cast<NodeId>(i);
         nodes_[id] = std::make_shared<Node>(id, this);
-        std::uint32_t rack_id = (i <= 3) ? 1 : 2; // Racks: Nodes 1-3 in Rack 1, 4+ in Rack 2
+        std::uint32_t rack_id = static_cast<std::uint32_t>((i - 1) % 3 + 1); // Multi-rack distribution (1, 2, 3)
         quorum_engine_.register_node(id, rack_id);
+        adaptive_controller_.register_node(id, rack_id);
     }
 }
 
@@ -106,6 +107,7 @@ void Cluster::kill_node(NodeId id) {
     if (node) {
         node->crash();
         NetworkSimulator::instance().isolate_node(id);
+        adaptive_controller_.update_telemetry(id, 999.0, 1.0, 0.0, false, 0);
     }
 }
 
@@ -114,6 +116,7 @@ void Cluster::recover_node(NodeId id) {
     if (node) {
         NetworkSimulator::instance().unisolate_node(id);
         node->recover();
+        adaptive_controller_.update_telemetry(id, 2.0, 0.0, 10.0, true, 0);
     }
 }
 

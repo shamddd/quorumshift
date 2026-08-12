@@ -8,8 +8,8 @@
 #include <optional>
 #include "dss/common.hpp"
 #include "dss/node.hpp"
-
 #include "dss/quorum_engine.hpp"
+#include "dss/adaptive_replica.hpp"
 
 namespace dss {
 
@@ -25,6 +25,9 @@ public:
 
     QuorumEngine& quorum_engine() { return quorum_engine_; }
     const QuorumEngine& quorum_engine() const { return quorum_engine_; }
+
+    AdaptiveReplicaController& adaptive_controller() { return adaptive_controller_; }
+    const AdaptiveReplicaController& adaptive_controller() const { return adaptive_controller_; }
 
     // RPC dispatch with network simulator checks
     std::optional<RequestVoteReply> send_request_vote(NodeId from, NodeId to, const RequestVoteArgs& args);
@@ -48,6 +51,7 @@ private:
     mutable std::mutex mutex_;
     std::unordered_map<NodeId, std::shared_ptr<Node>> nodes_;
     QuorumEngine quorum_engine_;
+    AdaptiveReplicaController adaptive_controller_;
 };
 
 } // namespace dss

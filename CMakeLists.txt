@@ -32,6 +32,7 @@ set(CORE_SOURCES
     src/cluster.cpp
     src/logger.cpp
     src/quorum_engine.cpp
+    src/adaptive_replica.cpp
 )
 
 add_library(dss_core STATIC ${CORE_SOURCES})
@@ -66,3 +67,7 @@ add_test(NAME test_network COMMAND test_network)
 add_executable(test_cluster tests/test_cluster.cpp)
 target_link_libraries(test_cluster PRIVATE dss_core)
 add_test(NAME test_cluster COMMAND test_cluster)
+
+add_executable(test_adaptive_replica tests/test_adaptive_replica.cpp)
+target_link_libraries(test_adaptive_replica PRIVATE dss_core)
+add_test(NAME test_adaptive_replica COMMAND test_adaptive_replica)
