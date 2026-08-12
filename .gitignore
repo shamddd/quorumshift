@@ -1,24 +1,13 @@
-# Build output
+# Build outputs
 build/
 bin/
-*.o
-*.a
-*.so
-*.dylib
+test_storage
+test_storage_direct
+.DS_Store
 
-# Python & Environment
+# Python
 .venv/
 __pycache__/
 *.pyc
 .pytest_cache/
-.mypy_cache/
-.ruff_cache/
-*.egg-info/
-
-# Benchmark artifacts
-benchmark_results.json
-
-# IDE
-.vscode/
-.idea/
-.DS_Store
+.coverage
