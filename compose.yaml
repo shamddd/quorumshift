@@ -1,0 +1,9 @@
+services:
+  dss-simulator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dss-simulator
+    command: ["demo"]
+    environment:
+      - LOG_LEVEL=INFO

@@ -1,0 +1,85 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cpp-build-test:
+    name: Build & Test (C++20 & CMake)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Build Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build g++-12
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 100
+
+      - name: Configure CMake
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build Executables & Tests
+        run: cmake --build build
+
+      - name: Run CTest Suite
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Execute Live Benchmark
+        run: ./build/dss-bench 500
+
+  python-test-lint:
+    name: Python Control Plane Tests & Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-python-version: '3.12'
+
+      - name: Install uv & Python Dependencies
+        run: |
+          pip install uv
+          uv sync --extra dev
+
+      - name: Build C++ Binary for Python Tests
+        run: |
+          sudo apt-get update && sudo apt-get install -y cmake ninja-build g++
+          cmake -B build -G Ninja
+          cmake --build build --target dss-cli
+
+      - name: Run Ruff Lint
+        run: uv run ruff check .
+
+      - name: Run Pytest Suite
+        run: uv run pytest
+
+  docker-validation:
+    name: Docker Build Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: dss-simulator:latest
+
+      - name: Test Docker Container Demo Run
+        run: docker run --rm dss-simulator:latest demo
