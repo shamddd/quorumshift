@@ -14,6 +14,8 @@ void Cluster::initialize(std::size_t num_nodes) {
     for (std::size_t i = 1; i <= num_nodes; ++i) {
         NodeId id = static_cast<NodeId>(i);
         nodes_[id] = std::make_shared<Node>(id, this);
+        std::uint32_t rack_id = (i <= 3) ? 1 : 2; // Racks: Nodes 1-3 in Rack 1, 4+ in Rack 2
+        quorum_engine_.register_node(id, rack_id);
     }
 }
 

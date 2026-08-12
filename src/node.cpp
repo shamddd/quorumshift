@@ -243,9 +243,8 @@ ClientWriteResponse Node::client_write(const std::string& key, const std::string
     Term term = current_term_;
     LogIndex index = storage_.append_log(term, CommandType::Put, key, value);
 
-    std::size_t ack_count = 1;
+    std::vector<NodeId> acked_nodes = {id_};
     std::size_t total_nodes = cluster_->node_count();
-    std::size_t quorum = (total_nodes / 2) + 1;
 
     lock.unlock();
 
@@ -263,15 +262,16 @@ ClientWriteResponse Node::client_write(const std::string& key, const std::string
 
         auto reply_opt = cluster_->send_append_entries(id_, peer_id, args);
         if (reply_opt.has_value() && reply_opt->success) {
-            ack_count++;
+            acked_nodes.push_back(peer_id);
         }
     }
 
     lock.lock();
-    if (ack_count >= quorum) {
+    bool quorum_satisfied = cluster_->quorum_engine().is_quorum_satisfied(acked_nodes, total_nodes);
+    if (quorum_satisfied) {
         commit_index_ = index;
         storage_.apply_committed(commit_index_);
-        Logger::instance().replication_success(id_, index, ack_count, total_nodes);
+        Logger::instance().replication_success(id_, index, acked_nodes.size(), total_nodes);
         resp.success = true;
     } else {
         resp.success = false;

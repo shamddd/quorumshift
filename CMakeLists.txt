@@ -31,6 +31,7 @@ set(CORE_SOURCES
     src/node.cpp
     src/cluster.cpp
     src/logger.cpp
+    src/quorum_engine.cpp
 )
 
 add_library(dss_core STATIC ${CORE_SOURCES})

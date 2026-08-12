@@ -9,6 +9,8 @@
 #include "dss/common.hpp"
 #include "dss/node.hpp"
 
+#include "dss/quorum_engine.hpp"
+
 namespace dss {
 
 class Cluster {
@@ -20,6 +22,9 @@ public:
 
     std::shared_ptr<Node> get_node(NodeId id);
     std::size_t node_count() const;
+
+    QuorumEngine& quorum_engine() { return quorum_engine_; }
+    const QuorumEngine& quorum_engine() const { return quorum_engine_; }
 
     // RPC dispatch with network simulator checks
     std::optional<RequestVoteReply> send_request_vote(NodeId from, NodeId to, const RequestVoteArgs& args);
@@ -42,6 +47,7 @@ public:
 private:
     mutable std::mutex mutex_;
     std::unordered_map<NodeId, std::shared_ptr<Node>> nodes_;
+    QuorumEngine quorum_engine_;
 };
 
 } // namespace dss
