@@ -1,0 +1,8 @@
+AdaptiveReplica Availability vs P99 Latency
+-------------------------------------------
+B0_FixedR3: Avail=95.86% | P99_Lat=215.81ms | Throughput=3587.44 ops/s
+B1_FixedR5: Avail=98.86% | P99_Lat=120.48ms | Throughput=3418.83 ops/s
+B2_RandomPlacement: Avail=96.57% | P99_Lat=135.26ms | Throughput=3565.72 ops/s
+B3_LatencyAwarePlacement: Avail=98.44% | P99_Lat=56.95ms | Throughput=4507.04 ops/s
+B4_FailureDomainStatic: Avail=99.15% | P99_Lat=56.62ms | Throughput=4144.59 ops/s
+B5_AdaptiveReplicaProposed: Avail=99.97% | P99_Lat=13.5ms | Throughput=4742.73 ops/s

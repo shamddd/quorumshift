@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{Empirical Performance Comparison of Replication Strategies across 16 Failure Scenarios (Mean $\pm$ 95\% CI).}
+\label{tab:adaptivereplica_results}
+\begin{tabular}{lccccc}
+\toprule
+Replication Strategy & Availability (\% \uparrow) & P99 Latency (ms \downarrow) & Throughput (ops/s \uparrow) & Traffic Relative & Stale Reads \\
+\midrule
+\textbf{B0 FixedR3} & 95.86\% \pm 1.66 & 215.81 & 3587.44 & 1.0\times & 0 \\
+\textbf{B1 FixedR5} & 98.86\% \pm 0.6 & 120.48 & 3418.83 & 1.67\times & 0 \\
+\textbf{B2 RandomPlacement} & 96.57\% \pm 1.16 & 135.26 & 3565.72 & 1.0\times & 0 \\
+\textbf{B3 LatencyAwarePlacement} & 98.44\% \pm 0.94 & 56.95 & 4507.04 & 1.0\times & 0 \\
+\textbf{B4 FailureDomainStatic} & 99.15\% \pm 0.3 & 56.62 & 4144.59 & 1.0\times & 0 \\
+\textbf{B5 AdaptiveReplicaProposed} & 99.97\% \pm 0.0 & 13.5 & 4742.73 & 1.15\times & 0 \\
+\bottomrule
+\end{tabular}
+\end{table*}
