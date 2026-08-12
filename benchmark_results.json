@@ -1,0 +1,32 @@
+[
+  {
+    "cluster_size": 3,
+    "total_ops": 500,
+    "successful_ops": 500,
+    "duration_sec": 0.00230775,
+    "ops_per_sec": 216661,
+    "p50_us": 4,
+    "p95_us": 6,
+    "p99_us": 12
+  },
+  {
+    "cluster_size": 5,
+    "total_ops": 500,
+    "successful_ops": 500,
+    "duration_sec": 0.00294383,
+    "ops_per_sec": 169847,
+    "p50_us": 6,
+    "p95_us": 7,
+    "p99_us": 21
+  },
+  {
+    "cluster_size": 7,
+    "total_ops": 500,
+    "successful_ops": 500,
+    "duration_sec": 0.00404863,
+    "ops_per_sec": 123499,
+    "p50_us": 8,
+    "p95_us": 9,
+    "p99_us": 28
+  }
+]
