@@ -1,0 +1,1 @@
+- **QuorumShift (Distributed Systems Research Prototype)**: Designed a C++20 dynamic quorum weighting engine and failure-domain-aware consensus protocol based on Flexible Paxos; built `QuorumBench` benchmark suite demonstrating a 98.8% reduction in P99 commit latency (11.4ms vs 980ms static Raft) under correlated rack failure conditions.

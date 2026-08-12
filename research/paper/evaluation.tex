@@ -1,0 +1,21 @@
+\section{Experimental Setup & QuorumBench}
+\label{sec:evaluation}
+
+\subsection{QuorumBench Scenarios}
+We evaluate QuorumShift on **QuorumBench**, comprising 6 failure scenarios:
+\begin{itemize}
+    \item \textbf{S01 (Steady State)}: Uniform 2\,ms LAN latency.
+    \item \textbf{S02 (Asymmetric WAN)}: +100\,ms RTT injected into Rack B.
+    \item \textbf{S03 (Correlated Failure)}: Total outage of Rack B (2 nodes).
+    \item \textbf{S04 (Packet Loss)}: 25\% packet loss injected into Rack B.
+    \item \textbf{S05 (Network Partition)}: 3 vs 2 network split.
+    \item \textbf{S06 (Recovery Storm)}: Reconnecting stale nodes under heavy write load.
+\end{itemize}
+
+\subsection{Evaluated Baselines}
+We compare QuorumShift against two baseline architectures:
+\begin{itemize}
+    \item \textbf{B0 (Static Majority Raft)}: Standard Raft requiring $\lfloor N/2 \rfloor + 1$ node acknowledgements.
+    \item \textbf{B1 (Static Flexible Raft)}: Fixed asymmetric quorums configured at deployment.
+    \item \textbf{B2 (QuorumShift)}: Proposed dynamic weighting consensus engine.
+\end{itemize}

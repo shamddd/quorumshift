@@ -1,0 +1,11 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\paragraph{Consensus Protocols}
+Foundational consensus protocols including Paxos \cite{lamport1998part, lamport2001paxos} and Raft \cite{ongaro2014search} established linearizable state-machine replication. ZooKeeper's Zab \cite{hunt2010zookeeper} and Google's Spanner \cite{corbett2013spanner} operationalized leader-driven quorums at scale.
+
+\paragraph{Flexible and Asymmetric Quorums}
+Flexible Paxos \cite{howard2016flexible} relaxed the classic quorum intersection rule, demonstrating that $Q_1 \cap Q_2 \neq \emptyset$ is sufficient for safety. Atlas \cite{whittaker2020atlas} optimized state machine replication for planet-scale WAN topologies. EPaxos \cite{moraru2013there} eliminated single-leader bottlenecks for non-conflicting writes.
+
+\paragraph{Cloud & Storage Quorum Systems}
+Amazon Aurora \cite{verbitski2017amazon} introduced a fixed 4/6 quorum write model across 3 Availability Zones. QuorumShift extends these static patterns by dynamically adapting commit weights at runtime based on continuous RTT telemetry.

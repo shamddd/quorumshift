@@ -1,0 +1,13 @@
+\section{Experimental Results}
+\label{sec:results}
+
+Table~\ref{tab:main_results} presents the performance metrics of all evaluated consensus architectures across QuorumBench.
+
+\input{../tables/main_results_table.tex}
+
+\subsection{Key Findings}
+\begin{enumerate}
+    \item \textbf{Tail Latency Reduction}: Under asymmetric WAN latency (S02), QuorumShift reduces P99 write commit latency from 142.0\,ms ($B0$) to 8.2\,ms ($B2$), representing a 94.2\% latency reduction.
+    \item \textbf{Availability Under Correlated Outage}: Under correlated rack failure (S03), static majority Raft ($B0$) stalls completely ($STCR = 83.33\%$, Throughput = 0.0 ops/s), while QuorumShift ($B2$) maintains 100.0\% $STCR$ and 3,900 ops/s throughput.
+    \item \textbf{Zero Stale Reads}: Across all 144 executed episodes, QuorumShift recorded 0 stale reads, confirming linearizability preservation.
+\end{enumerate}
