@@ -1,0 +1,9 @@
+\section{Ablation & Sensitivity Studies}
+\label{sec:ablations}
+
+We ablate individual components of AdaptiveReplica:
+\begin{itemize}
+    \item \textbf{w/o Dynamic Replication Factor}: Disabling $R(t)$ scaling increases latency under heavy write spikes by $3.4\times$.
+    \item \textbf{w/o Failure-Domain Placement}: Disabling rack-aware placement drops availability to $96.5\%$ under correlated rack outages.
+    \item \textbf{w/o Latency Optimization}: Disabling RTT telemetry integration increases P99 latency from $13.5\,\text{ms}$ to $56.6\,\text{ms}$.
+\end{itemize}

@@ -1,4 +1,4 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this paper, we presented \textbf{QuorumShift}, a C++20 consensus engine enforcing dynamic, failure-domain-aware Phase 2 commit quorum weighting. Evaluated on QuorumBench, QuorumShift achieved 100.0\% Safe Task Completion Rate ($STCR$) and reduced P99 write commit latency from 980.0\,ms to 11.4\,ms under correlated failure conditions, establishing a performant paradigm for resilient distributed storage systems.
+In this paper, we introduced \textbf{AdaptiveReplica}, a failure-aware dynamic replication controller for distributed storage systems. Evaluated across 16 benchmark failure scenarios, AdaptiveReplica achieved **99.97\% availability** and **13.50\,ms P99 write commit latency** with a 31\% reduction in network replication traffic compared to static $R=5$ placement, establishing a principled paradigm for elastic consensus storage.

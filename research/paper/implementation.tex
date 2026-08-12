@@ -1,0 +1,11 @@
+\section{Implementation}
+\label{sec:implementation}
+
+AdaptiveReplica is implemented in C++20 using RAII, smart pointers, and explicit thread-safety primitives (`std::mutex`, `std::shared_mutex`).
+
+The implementation comprises:
+\begin{itemize}
+    \item \texttt{include/dss/adaptive\_replica.hpp} \& \texttt{src/adaptive\_replica.cpp}: Core controller and policy evaluator.
+    \item \texttt{include/dss/cluster.hpp} \& \texttt{src/cluster.cpp}: Multi-rack topology registration and RPC routing.
+    \item \texttt{include/dss/node.hpp} \& \texttt{src/node.cpp}: Raft state machine and client write quorum evaluation.
+\end{itemize}

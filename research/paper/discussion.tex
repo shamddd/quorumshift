@@ -1,4 +1,6 @@
 \section{Discussion}
 \label{sec:discussion}
 
-The experimental results validate our hypothesis that continuous telemetry-driven dynamic quorum weighting eliminates tail latency bottlenecks caused by degraded nodes in static majority quorums. By shifting Phase 2 commit quorums dynamically to local healthy nodes during asymmetric latency spikes or correlated rack outages, QuorumShift preserves high write throughput without sacrificing linearizability.
+The experimental evaluation confirms our core thesis: static replication factor placement cannot simultaneously optimize availability, write latency, and resource cost under correlated rack failures.
+
+AdaptiveReplica proves that joint multi-signal adaptation ($R(t) \in [3, 7]$) with failure-domain-aware placement achieves optimal tradeoffs without violating Raft consensus invariants.

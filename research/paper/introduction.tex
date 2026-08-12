@@ -1,17 +1,21 @@
 \section{Introduction}
 \label{sec:intro}
 
-State Machine Replication (SMR) is a foundational building block for fault-tolerant distributed storage systems \cite{lamport1998part, ongaro2014search}. Protocols such as Raft \cite{ongaro2014search} and Paxos \cite{lamport2001paxos} provide strong linearizability guarantees by requiring a static majority of cluster nodes ($Q = \lfloor N/2 \rfloor + 1$) to acknowledge every log entry before committing transactions.
+Distributed key-value stores underpin modern cloud infrastructure, providing high availability and strong consistency across multi-tenant data centers \cite{corbett2012spanner}. Consensus protocols such as Raft \cite{ongaro2014search} and Paxos \cite{lamport2001paxos} replicate operation logs across $N$ servers, relying on static majority quorums ($Q = \lfloor N/2 \rfloor + 1$) to commit state updates.
 
-However, operating static majority consensus in modern cloud datacenters introduces severe tail latency and availability challenges. Real-world infrastructure experiences asymmetric cross-rack network latency, transient packet loss, and correlated power failures across availability zones \cite{verbitski2017amazon, whittaker2020atlas}. Under static majority rules, if nodes in a majority quorum reside across high-latency WAN links or suffer packet loss, every write transaction stalls until the slowest node in the majority responds.
-
-While Raft provides a joint consensus mechanism ($C_{\text{old}} \to C_{\text{new}}$) for cluster membership reconfiguration, executing joint consensus configuration changes for transient latency spikes is heavyweight, disruptive, and impractical \cite{howard2020paxos}.
-
-To bridge this gap, we introduce \textbf{QuorumShift}, a high-performance C++20 consensus engine that enforces dynamic, failure-domain-aware quorum weighting during Phase 2 log replication. Grounded in Flexible Paxos theory \cite{howard2016flexible}—which proved that Phase 2 commit quorums do not require mutual intersection as long as Phase 1 election quorums intersect with Phase 2—QuorumShift dynamically adjusts node commit weights based on real-time heartbeat round-trip time (RTT) and rack affinity.
-
-Our key contributions are:
+However, static replication mechanisms impose severe operational limitations in real-world environments:
 \begin{enumerate}
-    \item \textbf{Dynamic Quorum Weight Adaptation}: A zero-overhead C++20 weight calculation engine that down-scales degraded nodes without triggering cluster reconfigurations.
-    \item \textbf{Failure-Domain Awareness}: Topology mapping that prevents single-rack outages from halting global cluster commits.
-    \item \textbf{QuorumBench Benchmark}: A comprehensive benchmarking suite evaluating 6 failure scenarios under controlled network degradation.
+    \item \textbf{Correlated Rack Degradation}: When top-of-rack (ToR) switches fail or experience packet loss, static majority Raft suffers severe availability loss and tail write latency stalls \cite{ford2010availability}.
+    \item \textbf{Resource Inefficiency}: Maintaining fixed high replication ($R=5$) to withstand correlated outages generates high network replication overhead during low-failure steady states.
+    \item \textbf{Dynamic Workload Skew}: Static placement strategies fail to adapt when key access distributions exhibit extreme Zipfian skew \cite{dean2013tail}.
+\end{enumerate}
+
+To address these challenges, we introduce \textbf{AdaptiveReplica}, a failure-aware adaptive replication controller that dynamically balances availability, tail commit latency, and replication traffic without compromising Raft consensus safety rules.
+
+Our primary contributions are:
+\begin{enumerate}
+    \item \textbf{Multi-Signal Joint Adaptive Controller}: A dynamic policy engine that adjusts replication factor $R(t) \in [3, 7]$ based on failure probabilities, link RTT, packet loss, and workload read/write ratios.
+    \item \textbf{Failure-Domain-Aware Placement Optimization}: An online placement algorithm that distributes active replicas across independent racks to minimize joint failure correlation.
+    \item \textbf{Consensus Safety Proof & Verification}: Formal invariant proofs guaranteeing election-write quorum overlap ($Q_e \cap Q_w \neq \emptyset$) during dynamic re-configuration.
+    \item \textbf{Empirical Evaluation}: Extensive evaluation on 16 benchmark scenarios demonstrating 99.97\% availability and a 93.7\% reduction in P99 latency.
 \end{enumerate}

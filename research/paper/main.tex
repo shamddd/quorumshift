@@ -1,41 +1,51 @@
-\documentclass[10pt,twocolumn,letterpaper]{article}
+\documentclass[10pt,journal,compsoc]{IEEEtran}
 
-\usepackage{times}
-\usepackage{epsfig}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
 \usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{hyperref}
 
-\title{\textbf{QuorumShift: Failure-Domain-Aware Adaptive Consensus and Dynamic Quorum Scaling for Distributed Key-Value Engines}}
-
-\author{
-\textbf{Sham Satish Thakare}\\
-Independent Researcher\\
-{\tt\small 151498087+shamddd@users.noreply.github.com}
-}
-
-\date{\today}
-
 \begin{document}
 
-\maketitle
+\title{AdaptiveReplica: Failure-Aware Dynamic Replication for Distributed Storage under Correlated Faults}
 
+\author{Sham~Satish~Thakare
+\IEEEcompsocitemizethanks{\IEEEcompsocthanksitem S. S. Thakare is an independent research software engineer.\newline
+E-mail: 151498087+shamddd@users.noreply.github.com}}
+
+\markboth{IEEE Transactions on Parallel and Distributed Systems,~Vol.~XX, No.~X, Month~2026}%
+{Thakare: AdaptiveReplica: Failure-Aware Dynamic Replication for Distributed Storage}
+
+\IEEEtitleabstractindextext{%
 \begin{abstract}
 \input{abstract.tex}
 \end{abstract}
 
+\begin{IEEEkeywords}
+Distributed storage systems, Raft consensus, adaptive replication, correlated failure resilience, tail latency optimization.
+\end{IEEEkeywords}}
+
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\IEEEpeerreviewmaketitle
+
 \input{introduction.tex}
 \input{related_work.tex}
+\input{system_model.tex}
 \input{methodology.tex}
+\input{implementation.tex}
 \input{evaluation.tex}
 \input{results.tex}
-\input{discussion.tex}
+\input{ablations.tex}
 \input{limitations.tex}
+\input{discussion.tex}
 \input{conclusion.tex}
 
-\bibliographystyle{ieee_fullname}
+\bibliographystyle{IEEEtran}
 \bibliography{references}
 
 \end{document}

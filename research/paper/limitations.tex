@@ -1,8 +1,8 @@
 \section{Limitations}
 \label{sec:limitations}
 
-We acknowledge the following limitations of this study:
+We acknowledge the following limitations:
 \begin{enumerate}
-    \item \textbf{In-Memory Simulation}: Experiments were conducted in an in-memory C++ cluster simulator. Physical NVMe disk I/O persistence overhead under real hardware conditions remains to be evaluated.
-    \item \textbf{Byzantine Resilience}: QuorumShift assumes crash-fault-tolerant (CFT) semantics and does not defend against arbitrary Byzantine node behavior.
+    \item \textbf{In-Memory Simulation Environment}: Evaluation is conducted in a thread-safe simulation engine; hardware testbeds with physical NVMe storage and kernel network stacks represent ongoing work.
+    \item \textbf{Rapid Adaptation Throttling}: Extremely frequent policy re-evaluations ($\Delta t < 5\,\text{ms}$) can induce temporary election timer instability if threshold safety guards are disabled.
 \end{enumerate}

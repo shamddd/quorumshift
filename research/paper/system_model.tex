@@ -1,0 +1,13 @@
+\section{System Model & Problem Formulation}
+\label{sec:system_model}
+
+We model a cluster of $N$ nodes $\mathcal{N} = \{n_1, \dots, n_N\}$ partitioned across $M$ failure domains $\mathcal{D} = \{d_1, \dots, d_M\}$.
+
+\subsection{Optimization Problem}
+The objective of AdaptiveReplica is to solve the online optimization problem:
+\begin{align}
+    \min_{R(t), P(t)} \quad &\text{Cost}(t) = w_1 \cdot \text{Latency}_{\text{P99}}^{\text{write}}(t) + w_2 \cdot \text{Traffic}_{\text{repl}}(t) \\
+    \text{subject to} \quad &Q_e(t) \cap Q_w(t) \neq \emptyset, \quad \forall t \ge 0 \\
+    &R(t) \in [3, 7]
+\end{align}
+where $Q_e(t)$ is the election quorum size and $Q_w(t)$ is the active write commit quorum threshold.
