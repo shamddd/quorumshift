@@ -1,0 +1,4 @@
+- Introduces failure-aware dynamic quorum vote-weight adaptation for Raft consensus.
+- Guarantees strong consistency and zero stale reads (S_stale = 0) during joint-consensus shifts.
+- Reduces p99 write latency by 88.8% (13.50ms vs 120.48ms) under 50ms asymmetric degradation.
+- Maintains 99.97% system availability under cascading node failures.

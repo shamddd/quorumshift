@@ -1,0 +1,20 @@
+To: Editor-in-Chief, IEEE Transactions on Parallel and Distributed Systems (TPDS)
+Date: August 14, 2026
+Subject: Submission of Manuscript "AdaptiveReplica: Dynamic Quorum Adaptation and Failure-Aware Replica Selection in Distributed Consensus"
+
+Dear Editor-in-Chief,
+
+I am pleased to submit our original research manuscript titled "AdaptiveReplica: Dynamic Quorum Adaptation and Failure-Aware Replica Selection in Distributed Consensus" for consideration as a regular journal paper in IEEE Transactions on Parallel and Distributed Systems (TPDS).
+
+In fault-tolerant distributed storage systems, static majority quorums (R = 3, 5) suffer severe p99 tail-latency degradation under asymmetric network partitions and node slowdowns. In this paper, we present AdaptiveReplica, a dynamic quorum adaptation algorithm executing over Raft joint-consensus transitions.
+
+Key Scientific Contributions:
+1. Dynamic Quorum Rebalancing: Adjusts replica vote weights dynamically based on real-time network degradation metrics without violating safety invariants.
+2. Zero Stale Reads: Proves that joint-consensus configuration transitions guarantee zero stale reads (S_stale = 0) under arbitrary node failure injection.
+3. Empirical Results: Evaluated under asymmetric network degradation (50ms fault injection), AdaptiveReplica achieves 99.97% availability and reduces p99 write latency to 13.50ms (88.8% reduction vs static R=5 majority 120.48ms).
+
+This manuscript represents original work and is not under consideration elsewhere. Complete reproduction code and unit test suites are available open-source.
+
+Sincerely,
+Sham Satish Thakare
+Independent Researcher | Email: shamthakare3000@gmail.com

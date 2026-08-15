@@ -1,0 +1,4 @@
+Originality: This manuscript is original, unpublished work and is not currently under consideration by any other journal or conference.
+Conflicts of Interest: The author declares no conflicts of interest.
+Funding: This research received no external grant funding.
+Data & Code Availability: All benchmarking scripts, test suites, and raw metric outputs are open-source under Apache-2.0 at https://github.com/shamddd/quorumshift.
